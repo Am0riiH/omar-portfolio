@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/15 text-ink;
+  }
+
+  /* Visible, deliberate keyboard focus — never suppressed */
+  :focus-visible {
+    outline: 2px solid theme('colors.accent.DEFAULT');
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3 {
+    @apply font-display text-ink;
+  }
+}
+
+@layer components {
+  /* Monospace "status line" label — the signature detail used throughout
+     the site to echo Omar's networking background (routing tables,
+     protocol output) without ever tipping into gimmick. Used once per
+     view, at low visual weight. */
+  .eyebrow {
+    @apply font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted;
+  }
+
+  .eyebrow-dot::before {
+    content: '';
+    @apply inline-block h-[6px] w-[6px] rounded-full bg-accent mr-2 align-middle animate-blink;
+  }
+
+  .section {
+    @apply mx-auto w-full max-w-content px-6 md:px-10;
+  }
+
+  .hairline {
+    @apply border-t border-line;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
