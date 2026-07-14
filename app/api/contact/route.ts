@@ -33,6 +33,12 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+// Strip invisible/non-ASCII characters that can cause 422 validation errors
+function sanitizeInvisible(str: any): string {
+  if (typeof str !== 'string') return '';
+  return str.replace(/[\u200B-\u200F\uFEFF\u202A-\u202E\uFE00-\uFE0F]/g, '').trim();
+}
+
 // Simple HTML escape to prevent XSS in email bodies
 function escapeHtml(str: string): string {
   if (!str) return '';
@@ -51,7 +57,11 @@ function escapeHtml(str: string): string {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, subject, message, botField } = body;
+    const botField = body.botField;
+    const name = sanitizeInvisible(body.name);
+    const email = sanitizeInvisible(body.email);
+    const subject = sanitizeInvisible(body.subject);
+    const message = sanitizeInvisible(body.message);
 
     // Rate Limiting Check
     const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
@@ -81,9 +91,10 @@ export async function POST(request: Request) {
 
     // Basic email regex validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    const isAscii = /^[\x00-\x7F]+$/;
+    if (!isAscii.test(email) || !emailRegex.test(email)) {
       return NextResponse.json(
-        { success: false, error: 'Please provide a valid email address.' },
+        { success: false, error: 'Please provide a valid email address using standard characters.' },
         { status: 400 }
       );
     }
