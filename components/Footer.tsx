@@ -28,7 +28,7 @@ export default function Footer() {
         </ul>
       </div>
       <div className="section pb-8">
-        <p className="text-xs text-muted/60">
+        <p className="text-xs text-muted">
           &copy; {new Date().getFullYear()} Omar Hussein. All rights reserved.
         </p>
       </div>
