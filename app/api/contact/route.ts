@@ -58,10 +58,30 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const botField = body.botField;
+    const turnstileToken = body.turnstileToken;
     const name = sanitizeInvisible(body.name);
     const email = sanitizeInvisible(body.email);
     const subject = sanitizeInvisible(body.subject);
     const message = sanitizeInvisible(body.message);
+
+    // 0. Cloudflare Turnstile CAPTCHA verification — runs before all other checks.
+    //    The secret key is server-side only; the token is single-use and validated
+    //    directly with Cloudflare, so it cannot be spoofed or replayed.
+    const tsRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: process.env.TURNSTILE_SECRET_KEY ?? '',
+        response: turnstileToken ?? '',
+      }),
+    });
+    const tsData = await tsRes.json();
+    if (!tsData.success) {
+      return NextResponse.json(
+        { success: false, error: 'CAPTCHA verification failed. Please try again.' },
+        { status: 400 }
+      );
+    }
 
     // Rate Limiting Check
     const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
