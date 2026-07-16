@@ -5,7 +5,7 @@ export const metadata: Metadata = { title: 'Portfolio & Experience' };
 
 const PROJECTS = [
   {
-    title: 'Nike Concept Store (E-Commerce)',
+    title: 'Sneaker Concept Store (E-Commerce)',
     year: 2026,
     type: 'Dynamic E-Commerce Application',
     status: 'In Development',
