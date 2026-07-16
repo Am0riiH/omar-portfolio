@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- White circle background -->
+  <circle cx="100" cy="100" r="96" fill="#FFFFFF"/>
+
+  <!-- < bracket -->
+  <polyline
+    points="72,48 30,100 72,152"
+    stroke="#2F5CFF"
+    stroke-width="16"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- / slash -->
+  <line
+    x1="120" y1="42"
+    x2="80"  y2="158"
+    stroke="#2F5CFF"
+    stroke-width="16"
+    stroke-linecap="round"
+  />
+
+  <!-- > bracket -->
+  <polyline
+    points="128,48 170,100 128,152"
+    stroke="#2F5CFF"
+    stroke-width="16"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

@@ -54,6 +54,17 @@ export default function Navbar() {
           className="group font-display text-lg tracking-tight text-ink flex items-center transition-transform duration-300 hover:scale-[1.02] origin-left"
           onClick={() => setOpen(false)}
         >
+          {/* Mobile-only </> icon — reuses the same SVG geometry and blink animation
+              as the Hero RoutePath component, rendered inline at navbar scale (w-5 h-5).
+              Hidden on md+ where the Hero section icon takes over. */}
+          <span className="mr-2 flex md:hidden" aria-hidden="true">
+            <svg viewBox="0 0 200 120" className="h-5 w-5" fill="none">
+              <polyline points="60,20 25,60 60,100" stroke="#2F5CFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+              <line x1="110" y1="15" x2="90" y2="105" stroke="#2F5CFF" strokeWidth="3.5" strokeLinecap="round" />
+              <polyline points="140,20 175,60 140,100" stroke="#2F5CFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+              <line x1="188" y1="38" x2="188" y2="82" stroke="#2F5CFF" strokeWidth="3" strokeLinecap="round" className="animate-blink" />
+            </svg>
+          </span>
           <motion.div
             variants={containerVariants}
             initial="hidden"
