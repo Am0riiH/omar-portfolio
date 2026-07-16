@@ -10,14 +10,14 @@ export default function RoutePath() {
 
   return (
     <motion.div
-      className="flex h-[260px] w-full max-w-md items-end justify-start"
+      className="flex h-auto w-full max-w-[220px] items-end justify-start sm:max-w-[280px] md:max-w-md"
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
     >
       <svg
         viewBox="0 0 200 120"
-        className="h-[32rem] w-[32rem]"
+        className="h-auto w-full"
         fill="none"
         role="img"
         aria-label="Coding terminal symbol"

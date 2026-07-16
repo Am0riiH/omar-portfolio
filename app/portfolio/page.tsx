@@ -5,7 +5,7 @@ export const metadata: Metadata = { title: 'Portfolio & Experience' };
 
 const PROJECTS = [
   {
-    title: 'Nike Concept Store (E-Commerce)',
+    title: 'Kicks Concept Store (E-Commerce)',
     year: 2026,
     type: 'Dynamic E-Commerce Application',
     status: 'In Development',
@@ -138,7 +138,7 @@ export default function PortfolioPage() {
 
               <div>
                 <h3 className="font-display text-2xl">{project.title}</h3>
-                <p className="mt-1 text-sm text-muted">{project.type}</p>
+                <p className="mt-1 text-sm text-muted/70">{project.type}</p>
 
                 <p className="mt-4 max-w-prose text-base leading-relaxed text-muted">
                   {project.overview}

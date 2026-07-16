@@ -50,7 +50,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hidden justify-self-end md:flex">
+          <div className="flex justify-center md:justify-self-end">
             <RoutePath />
           </div>
         </div>
