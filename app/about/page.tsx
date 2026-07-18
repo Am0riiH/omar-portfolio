@@ -21,14 +21,14 @@ export default function AboutPage() {
         <div className="max-w-prose space-y-6 text-lg leading-relaxed text-muted">
           <p>
             I&apos;m a Front-End Developer with a foundation rooted in{' '}
-            <span className="text-ink">Computer Science and Information Technology</span>
+            <span className="text-ink dark:text-gray-50">Computer Science and Information Technology</span>
             {' '}— a foundation that isn&apos;t just academic theory, but the engine behind
             every interface I build. I believe the best digital products live at the exact
             intersection of rigorous system architecture and striking, human-centric design.
           </p>
           <p>
             I don&apos;t just write code — I engineer{' '}
-            <span className="text-ink">resilient, highly optimized, and scalable front-end solutions</span>,
+            <span className="text-ink dark:text-gray-50">resilient, highly optimized, and scalable front-end solutions</span>,
             while obsessing over pixel-perfect UI/UX implementation. From crafting modular,
             state-driven components to orchestrating smooth animations and interactive elements,
             my methodology is always performance-first, treating speed, accessibility, and
@@ -42,7 +42,7 @@ export default function AboutPage() {
             {PURSUITS.map((p) => (
               <li
                 key={p}
-                className="rounded-lg border border-line bg-surface px-4 py-3 text-sm text-ink"
+                className="rounded-lg border border-line bg-surface px-4 py-3 text-sm text-ink dark:text-gray-50 dark:bg-neutral-900 dark:border-neutral-800"
               >
                 {p}
               </li>

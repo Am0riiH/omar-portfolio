@@ -29,7 +29,7 @@ export default function ContactPage() {
                   href={link.href}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="group flex items-center justify-between border-b border-line py-3 text-ink transition-colors duration-300 hover:border-accent"
+                  className="group flex items-center justify-between border-b border-line py-3 text-ink dark:text-gray-50 transition-colors duration-300 hover:border-accent"
                 >
                   <span>{link.label}</span>
                   <span className="font-mono text-xs text-muted transition-colors group-hover:text-accent">

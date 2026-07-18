@@ -33,16 +33,16 @@ export default function CertificationsPage() {
         {CERTS.map((cert, i) => (
           <article
             key={i}
-            className="flex flex-col justify-between rounded-2xl border border-line bg-surface p-8 transition-colors duration-300 hover:border-accent"
+            className="flex flex-col justify-between rounded-2xl border border-line dark:border-neutral-800 bg-surface dark:bg-neutral-900 p-8 transition-colors duration-300 hover:border-accent"
           >
             <div>
-              <span className="font-mono text-xs text-muted">
+              <span className="font-mono text-xs text-muted dark:text-gray-400">
                 CERT {String(i + 1).padStart(2, '0')}
               </span>
-              <h2 className="mt-3 font-display text-xl leading-snug">{cert.title}</h2>
-              <p className="mt-4 text-sm leading-relaxed text-muted">{cert.note}</p>
+              <h2 className="mt-3 font-display text-xl leading-snug text-ink dark:text-gray-50">{cert.title}</h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted dark:text-gray-400">{cert.note}</p>
             </div>
-            <p className="mt-8 text-sm text-ink">{cert.issuer}</p>
+            <p className="mt-8 text-sm text-ink dark:text-gray-50">{cert.issuer}</p>
           </article>
         ))}
       </div>

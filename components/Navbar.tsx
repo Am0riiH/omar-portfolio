@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 // Navigation routes for the application
 const ROUTES = [
@@ -47,11 +48,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-paper/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line dark:border-neutral-800 bg-paper/85 dark:bg-zinc-950/85 backdrop-blur-md transition-colors duration-300">
       <nav className="section flex h-20 items-center justify-between" aria-label="Primary">
         <Link
           href="/"
-          className="group font-display text-lg tracking-tight text-ink flex items-center transition-transform duration-300 hover:scale-[1.02] origin-left"
+          className="group font-display text-lg tracking-tight text-ink dark:text-gray-100 flex items-center transition-transform duration-300 hover:scale-[1.02] origin-left"
           onClick={() => setOpen(false)}
         >
           {/* Mobile-only </> icon — reuses the same SVG geometry and blink animation
@@ -104,7 +105,7 @@ export default function Navbar() {
               <li key={route.href}>
                 <Link
                   href={route.href}
-                  className="group relative flex items-center gap-2 px-4 py-2 text-sm text-ink transition-colors duration-300 ease-exec"
+                  className="group relative flex items-center gap-2 px-4 py-2 text-sm text-ink dark:text-gray-100 transition-colors duration-300 ease-exec"
                 >
 
                   <span>{route.label}</span>
@@ -119,24 +120,28 @@ export default function Navbar() {
           })}
         </ul>
 
-        <Link
-          href="/contact"
-          className="hidden rounded-full border border-ink px-5 py-2 text-sm text-ink transition-colors duration-300 ease-exec hover:bg-ink hover:text-paper md:inline-flex"
-        >
-          Let&rsquo;s talk
-        </Link>
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          
+          <Link
+            href="/contact"
+            className="hidden rounded-full border border-ink dark:border-gray-100 px-5 py-2 text-sm text-ink dark:text-gray-100 transition-all duration-300 ease-exec hover:scale-[1.02] hover:bg-ink hover:text-paper dark:hover:bg-gray-100 dark:hover:text-zinc-950 md:inline-flex"
+          >
+            Let&rsquo;s talk
+          </Link>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-label="Toggle navigation menu"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? 'translate-y-[3.5px] rotate-45' : ''}`} />
-          <span className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? '-translate-y-[3.5px] -rotate-45' : ''}`} />
-        </button>
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-label="Toggle navigation menu"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className={`h-px w-6 bg-ink dark:bg-gray-100 transition-transform duration-300 ${open ? 'translate-y-[3.5px] rotate-45' : ''}`} />
+            <span className={`h-px w-6 bg-ink dark:bg-gray-100 transition-transform duration-300 ${open ? '-translate-y-[3.5px] -rotate-45' : ''}`} />
+          </button>
+        </div>
       </nav>
 
       {/* Mobile route list */}
@@ -147,14 +152,14 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-line bg-paper md:hidden"
+            className="overflow-hidden border-t border-line dark:border-neutral-800 bg-paper dark:bg-zinc-950 md:hidden"
           >
             {ROUTES.map((route) => (
-              <li key={route.href} className="hairline first:border-t-0">
+              <li key={route.href} className="hairline first:border-t-0 border-line dark:border-neutral-800">
                 <Link
                   href={route.href}
                   onClick={() => setOpen(false)}
-                  className="section flex items-center gap-3 py-4 text-base text-ink"
+                  className="section flex items-center gap-3 py-4 text-base text-ink dark:text-gray-100 hover:bg-surface dark:hover:bg-neutral-900 transition-colors"
                 >
 
                   {route.label}

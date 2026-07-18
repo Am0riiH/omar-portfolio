@@ -50,7 +50,7 @@ export default function SkillBadge({ name }: { name: string }) {
 
   return (
     <li
-      className="group flex items-center gap-2.5 rounded-full border border-line px-4 py-2 text-sm text-ink transition-all duration-300 hover:border-accent hover:text-accent hover:scale-[1.05]"
+      className="group flex items-center gap-2.5 rounded-full border border-line px-4 py-2 text-sm text-ink dark:text-gray-50 transition-all duration-300 hover:border-accent hover:text-accent hover:scale-[1.05]"
       role="listitem"
     >
       {Icon && (

@@ -58,7 +58,7 @@ export default function ContactForm() {
     return (
       <div className="rounded-2xl border border-line bg-surface p-8">
         <p className="font-mono text-xs text-accent">message sent</p>
-        <p className="mt-2 font-display text-ink">
+        <p className="mt-2 font-display text-ink dark:text-gray-50">
           Message received. I read every one personally — expect a reply within 24-48 hours.
         </p>
       </div>
@@ -86,7 +86,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full rounded-lg border border-line bg-paper px-4 py-3 text-ink outline-none transition-colors duration-300 focus:border-accent"
+          className="w-full rounded-lg border border-line dark:border-neutral-800 bg-paper dark:bg-zinc-950 px-4 py-3 text-ink dark:text-gray-50 outline-none transition-colors duration-300 focus:border-accent dark:focus:border-blue-400"
         />
       </div>
 
@@ -95,7 +95,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'submitting' || !turnstileToken}
-          className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm text-paper transition-colors duration-300 ease-exec hover:bg-accent disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm text-paper transition-all duration-300 ease-exec hover:bg-accent hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:bg-ink"
         >
           {status === 'submitting' ? 'Sending…' : 'Send message'}
         </button>
@@ -149,7 +149,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="w-full rounded-lg border border-line bg-paper px-4 py-3 text-ink outline-none transition-colors duration-300 focus:border-accent"
+        className="w-full rounded-lg border border-line dark:border-neutral-800 bg-paper dark:bg-zinc-950 px-4 py-3 text-ink dark:text-gray-50 outline-none transition-colors duration-300 focus:border-accent dark:focus:border-blue-400"
       />
     </div>
   );

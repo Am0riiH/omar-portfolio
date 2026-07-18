@@ -145,7 +145,7 @@ export default function PortfolioPage() {
                 </p>
 
                 <div className="mt-6 max-w-prose">
-                  <h4 className="text-xs font-mono text-ink mb-3 uppercase tracking-wider">Key Features</h4>
+                  <h4 className="text-xs font-mono text-ink dark:text-gray-50 mb-3 uppercase tracking-wider">Key Features</h4>
                   <ul className="space-y-2">
                     {project.features.map((feature, fIdx) => {
                       const splitIdx = feature.indexOf(':');
@@ -165,7 +165,7 @@ export default function PortfolioPage() {
                         <li key={fIdx} className="text-sm leading-relaxed text-muted flex gap-2">
                           <span className="text-accent mt-1 opacity-60">▹</span>
                           <span>
-                            <span className="font-medium text-ink">{title}:</span>{desc}
+                            <span className="font-medium text-ink dark:text-gray-50">{title}:</span>{desc}
                           </span>
                         </li>
                       );

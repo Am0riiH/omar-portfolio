@@ -30,6 +30,8 @@ const mono = JetBrains_Mono({
   display: 'swap',
 });
 
+import { ThemeProvider } from '@/components/ThemeProvider';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://omarhussein.dev'),
   title: {
@@ -48,12 +50,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
-      <body className="flex min-h-screen flex-col relative">
-        <AnimatedBackground />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col relative bg-paper text-ink dark:bg-zinc-950 dark:text-gray-100 transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AnimatedBackground />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

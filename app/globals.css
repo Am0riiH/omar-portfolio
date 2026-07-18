@@ -23,7 +23,7 @@
   }
 
   h1, h2, h3 {
-    @apply font-display text-ink;
+    @apply font-display text-ink dark:text-gray-50;
   }
 }
 

@@ -23,7 +23,7 @@ export default function HomePage() {
         <div className="grid items-center gap-16 md:grid-cols-[1.1fr_0.9fr]">
           <div className="animate-fade-up">
             <Eyebrow live>available for front-end roles</Eyebrow>
-            <h1 className="text-display-xl font-display">
+            <h1 className="text-display-xl font-display text-ink dark:text-gray-50">
               Interfaces engineered with the same precision as a{' '}
               <span className="italic text-accent">routing table.</span>
             </h1>
@@ -36,14 +36,14 @@ export default function HomePage() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
                 href="/portfolio"
-                className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm text-paper transition-colors duration-300 ease-exec hover:bg-accent"
+                className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm text-paper transition-all duration-300 ease-exec hover:bg-accent hover:scale-[1.02]"
               >
                 View the work
                 <span className="transition-transform duration-300 ease-exec group-hover:translate-x-1">→</span>
               </Link>
               <Link
                 href="/about"
-                className="text-sm text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+                className="text-sm text-ink dark:text-gray-50 underline decoration-line dark:decoration-neutral-700 underline-offset-4 transition-colors hover:decoration-accent"
               >
                 More about Omar
               </Link>
@@ -57,10 +57,10 @@ export default function HomePage() {
       </section>
 
       <section className="section mt-28 md:mt-36">
-        <div className="hairline grid gap-8 pt-10 sm:grid-cols-3">
+        <div className="hairline border-line dark:border-neutral-800 grid gap-8 pt-10 sm:grid-cols-3">
           {CAPABILITIES.map((c) => (
             <div key={c.label}>
-              <p className="font-display text-xl">{c.label}</p>
+              <p className="font-display text-xl text-ink dark:text-gray-50">{c.label}</p>
               <p className="mt-2 text-sm text-muted">{c.detail}</p>
             </div>
           ))}
