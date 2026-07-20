@@ -123,7 +123,7 @@ export async function POST(request: Request) {
     // Replace 'YOUR_EMAIL@example.com' with the email where you want to receive messages.
     // Ensure you have verified your sending domain or are using the test environment.
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact Form <onboarding@resend.dev>', // Update this to your verified domain e.g., 'hello@yourdomain.com'
+      from: 'Omar Hussein <hello@amoridev.com>',
       to: 'omar.bin7ussien@gmail.com',
       replyTo: email,
       subject: subject ? `New Portfolio Message: ${subject}` : `New Portfolio Message from ${name}`,

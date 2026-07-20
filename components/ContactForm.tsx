@@ -58,7 +58,7 @@ export default function ContactForm() {
     return (
       <div className="rounded-2xl border border-line bg-surface p-8">
         <p className="font-mono text-xs text-accent">message sent</p>
-        <p className="mt-2 font-display text-ink dark:text-gray-50">
+        <p className="mt-2 font-display text-ink">
           Message received. I read every one personally — expect a reply within 24-48 hours.
         </p>
       </div>

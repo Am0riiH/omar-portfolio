@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: 'Contact' };
 const LINKS = [
   { label: 'GitHub', href: 'https://github.com/Am0riiH', hop: 'github.com' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/am0rih/', hop: 'linkedin.com' },
-  { label: 'Email', href: 'mailto:omar.bin7ussien@gmail.com', hop: 'omar.bin7ussien@gmail.com' },
+  { label: 'Email', href: 'mailto:hello@amoridev.com', hop: 'hello@amoridev.com' },
 ];
 
 export default function ContactPage() {

@@ -1,7 +1,7 @@
 const SOCIALS = [
   { label: 'GitHub', href: 'https://github.com/Am0riiH' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/am0rih/' },
-  { label: 'Email', href: 'mailto:omar.bin7ussien@gmail.com' },
+  { label: 'Email', href: 'mailto:hello@amoridev.com' },
 ];
 
 export default function Footer() {
