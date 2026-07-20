@@ -5,10 +5,11 @@
  *   app/icon.png        (32 × 32  — general browser fallback)
  *   app/apple-icon.png  (180 × 180 — iOS Safari apple-touch-icon)
  *
- * Design mirrors app/icon.svg:
- *   Background : #FFFFFF (light — fixed, not theme-switching)
- *   Strokes    : #2F5CFF (signal blue, same as tailwind accent)
- *   Rounded corners on background rect
+ * Design:
+ *   Background : transparent (no solid fill — works on any tab bar color)
+ *   Strokes    : two-pass render
+ *     Pass 1 — white outline (1.6× sw, 55% opacity) → legible on dark tab bars
+ *     Pass 2 — #2F5CFF blue  (1.0× sw, 100% opacity) → legible on light tab bars
  */
 
 import zlib from 'node:zlib';
@@ -78,11 +79,14 @@ function encodePNG(width, height, rgba) {
 
 // ---------------------------------------------------------------------------
 // Rasteriser: draws the </> icon into an RGBA Uint8Array
+// Transparent background, two-pass strokes:
+//   Pass 1 — white outline (sw × 1.6, 55% opacity) → visible on dark tab bars
+//   Pass 2 — #2F5CFF fill  (sw × 1.0, 100% opacity) → visible on light tab bars
 // ---------------------------------------------------------------------------
 function drawIcon(size) {
-  const rgba = new Uint8Array(size * size * 4);
+  const rgba = new Uint8Array(size * size * 4); // all zeroes = fully transparent
 
-  // Helper: set pixel (with alpha compositing)
+  // Helper: set pixel (with alpha compositing over existing pixels)
   function setPixel(x, y, r, g, b, a) {
     if (x < 0 || y < 0 || x >= size || y >= size) return;
     const i = (y * size + x) * 4;
@@ -96,67 +100,56 @@ function drawIcon(size) {
     rgba[i + 3] = Math.round(outA * 255);
   }
 
-  // 1. Rounded-rect background (#FFFFFF)
-  const radius = Math.round(size * 0.18); // ~18% corner radius, matches SVG rx=40/200
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      // Check if point is inside rounded rect
-      const cx = Math.max(radius, Math.min(size - 1 - radius, x));
-      const cy = Math.max(radius, Math.min(size - 1 - radius, y));
-      const dx = x - cx, dy = y - cy;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      // Anti-aliased edge
-      const alpha = Math.max(0, Math.min(255, (radius + 0.5 - dist) * 255));
-      setPixel(x, y, 255, 255, 255, alpha);
-    }
-  }
+  const baseSW = Math.max(1.5, size * 0.082); // ~8.2% of size
 
-  // 2. Draw </> using anti-aliased line primitives (#2F5CFF)
-  const R = 0x2F, G = 0x5C, B = 0xFF;
-  const sw = Math.max(1.5, size * 0.078); // stroke width ~7.8% of size
-
-  function drawLineAA(x0, y0, x1, y1) {
-    // Wu's line algorithm (anti-aliased)
+  // Generic thick-line renderer (modified Wu, supports arbitrary stroke width)
+  function drawStroke(x0, y0, x1, y1, strokeW, r, g, b, alpha) {
     const dx = Math.abs(x1 - x0), dy = Math.abs(y1 - y0);
     const steep = dy > dx;
-    if (steep) { [x0, y0] = [y0, x0]; [x1, y1] = [y1, x1]; }
-    if (x0 > x1) { [x0, x1] = [x1, x0]; [y0, y1] = [y1, y0]; }
-    const ddx = x1 - x0, ddy = y1 - y0;
-    const gradient = ddx === 0 ? 1 : ddy / ddx;
+    if (steep)  { [x0, y0] = [y0, x0]; [x1, y1] = [y1, x1]; }
+    if (x0 > x1){ [x0, x1] = [x1, x0]; [y0, y1] = [y1, y0]; }
+    const ddx = x1 - x0;
+    const gradient = ddx === 0 ? 1 : (y1 - y0) / ddx;
+    const halfSW = strokeW / 2;
     let yf = y0;
-    const halfSW = sw / 2;
-
     for (let x = Math.floor(x0); x <= Math.ceil(x1); x++) {
       const yt = yf;
-      // Paint a cross-section (perpendicular spread = sw)
       for (let oy = -Math.ceil(halfSW + 1); oy <= Math.ceil(halfSW + 1); oy++) {
-        const dist = Math.abs(oy - (yt - Math.floor(yt)));
         const coverage = Math.max(0, Math.min(1, halfSW - Math.abs(oy) + 0.5));
-        const a = Math.round(coverage * 255);
+        const a = Math.round(coverage * alpha);
         if (a <= 0) continue;
         const py = Math.floor(yt) + oy;
-        steep ? setPixel(py, x, R, G, B, a) : setPixel(x, py, R, G, B, a);
+        steep ? setPixel(py, x, r, g, b, a) : setPixel(x, py, r, g, b, a);
       }
       yf += gradient;
     }
   }
 
-  // Scale coordinates from the SVG 200×200 viewBox to our canvas size
+  // Scale from the SVG 200×200 viewBox
   const s = size / 200;
 
-  // < bracket: points="72,48 30,100 72,152"
-  drawLineAA(72*s, 48*s,  30*s, 100*s);
-  drawLineAA(30*s, 100*s, 72*s, 152*s);
+  // SVG segment definitions
+  const segs = [
+    [72, 48,  30,  100],  // < top arm
+    [30, 100, 72,  152],  // < bottom arm
+    [120, 42, 80,  158],  // / slash
+    [128, 48, 170, 100],  // > top arm
+    [170, 100, 128, 152], // > bottom arm
+  ];
 
-  // / slash: x1=120 y1=42  x2=80 y2=158
-  drawLineAA(120*s, 42*s, 80*s, 158*s);
+  // Pass 1 — white outline (1.6× width, 55% opacity) for dark-background legibility
+  for (const [x0, y0, x1, y1] of segs) {
+    drawStroke(x0*s, y0*s, x1*s, y1*s, baseSW * 1.6, 255, 255, 255, 140);
+  }
 
-  // > bracket: points="128,48 170,100 128,152"
-  drawLineAA(128*s, 48*s,  170*s, 100*s);
-  drawLineAA(170*s, 100*s, 128*s, 152*s);
+  // Pass 2 — signal blue (#2F5CFF) at full opacity, layered on top
+  for (const [x0, y0, x1, y1] of segs) {
+    drawStroke(x0*s, y0*s, x1*s, y1*s, baseSW, 0x2F, 0x5C, 0xFF, 255);
+  }
 
   return rgba;
 }
+
 
 // ---------------------------------------------------------------------------
 // Generate and write both PNGs
