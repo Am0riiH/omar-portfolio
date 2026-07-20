@@ -98,7 +98,7 @@ export default function AnimatedBackground() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Draw connecting lines between particles
-      const maxDistance = 120; // restore distance to show network lines
+      const maxDistance = 120;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;

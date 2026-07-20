@@ -112,7 +112,6 @@ export default function PortfolioPage() {
         Work built for real teams and real users.
       </h1>
 
-
       {/* Projects */}
       <div className="mt-20">
         <h2 className="eyebrow mb-6">selected projects</h2>

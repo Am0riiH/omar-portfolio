@@ -1,38 +1,44 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { useTheme } from "next-themes";
-import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
-import { motion, AnimatePresence } from "framer-motion";
+import * as React from 'react';
+import { useTheme } from 'next-themes';
+import { HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function ThemeToggle() {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
-  // When mounted on client, now we can show the UI
+  // Defer rendering until the client has resolved the active theme so the
+  // icon matches the actual state without a hydration flash.
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Render a placeholder button with the same dimensions during SSR/hydration
+  // to prevent layout shift when the real button mounts.
   if (!mounted) {
     return (
-      <button className="relative p-2 rounded-md hover:bg-surface dark:hover:bg-neutral-800 transition-colors w-9 h-9" aria-label="Toggle dark mode">
+      <button
+        className="relative p-2 rounded-md hover:bg-surface dark:hover:bg-neutral-800 transition-colors w-9 h-9"
+        aria-label="Toggle dark mode"
+      >
         <span className="sr-only">Toggle dark mode</span>
       </button>
     );
   }
 
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  const currentTheme = theme === 'system' ? systemTheme : theme;
 
   return (
     <button
-      onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
       className="relative p-2 rounded-md hover:bg-surface dark:hover:bg-neutral-800 transition-colors w-9 h-9 flex items-center justify-center text-muted dark:text-gray-300 hover:text-ink dark:hover:text-white"
       aria-label="Toggle dark mode"
     >
       <span className="sr-only">Toggle dark mode</span>
       <AnimatePresence mode="wait" initial={false}>
-        {currentTheme === "dark" ? (
+        {currentTheme === 'dark' ? (
           <motion.div
             key="dark"
             initial={{ opacity: 0, rotate: -45 }}

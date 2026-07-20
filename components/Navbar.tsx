@@ -40,10 +40,10 @@ export default function Navbar() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 12,
-        stiffness: 120, // Creates the subtle bounce at the end
-      }
+        stiffness: 120, // subtle spring bounce on settle
+      },
     },
   };
 
@@ -122,7 +122,6 @@ export default function Navbar() {
 
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          
           <Link
             href="/contact"
             className="hidden rounded-full border border-ink dark:border-gray-100 px-5 py-2 text-sm text-ink dark:text-gray-100 transition-all duration-300 ease-exec hover:scale-[1.02] hover:bg-ink hover:text-paper dark:hover:bg-gray-100 dark:hover:text-zinc-950 md:inline-flex"

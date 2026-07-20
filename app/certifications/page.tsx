@@ -14,7 +14,7 @@ const CERTS = [
     issuer: 'Meta · via Coursera',
     note: 'Second professional certification reinforcing production front-end practices and component architecture.',
   },
-   {
+  {
     title: 'DevOps Professional Certificate',
     issuer: 'IBM · via Coursera',
     note: 'Comprehensive program covering DevOps principles, tools, and practices.',
