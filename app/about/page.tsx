@@ -1,7 +1,18 @@
 import type { Metadata } from 'next';
 import Eyebrow from '@/components/Eyebrow';
 
-export const metadata: Metadata = { title: 'About' };
+export const metadata: Metadata = {
+  title: 'About',
+  description: 'Learn about Omar Hussein, a Front-End Developer with a strong foundation in Computer Science, bridging rigorous system architecture with striking UI/UX design.',
+  alternates: {
+    canonical: 'https://amoridev.com/about',
+  },
+  openGraph: {
+    title: 'About | Omar Hussein',
+    description: 'Learn about Omar Hussein, a Front-End Developer with a strong foundation in Computer Science, bridging rigorous system architecture with striking UI/UX design.',
+    url: 'https://amoridev.com/about',
+  },
+};
 
 const PURSUITS = ['React & Tailwind CSS', 'Artificial Intelligence', 'Motion & 3D UI', 'Data Analysis'];
 

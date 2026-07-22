@@ -1,6 +1,42 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Eyebrow from '@/components/Eyebrow';
+import JsonLd from '@/components/JsonLd';
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Portfolio of Omar Hussein, a Front-End Developer crafting interfaces engineered with the precision of a routing table using React, Next.js, and Tailwind CSS.',
+  alternates: {
+    canonical: 'https://amoridev.com/',
+  },
+  openGraph: {
+    title: 'Home | Omar Hussein',
+    description: 'Portfolio of Omar Hussein, a Front-End Developer crafting interfaces engineered with the precision of a routing table using React, Next.js, and Tailwind CSS.',
+    url: 'https://amoridev.com/',
+  },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Omar Hussein",
+  "jobTitle": "Front-End Developer",
+  "url": "https://amoridev.com",
+  "sameAs": [
+    "https://github.com/Am0riiH",
+    "https://www.linkedin.com/in/am0rih/"
+  ],
+  "knowsAbout": ["React", "Next.js", "Tailwind CSS", "TypeScript", "Front-End Development"]
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Omar Hussein Portfolio",
+  "url": "https://amoridev.com/"
+};
+
 
 // The route diagram is purely decorative and never affects layout (it has
 // a reserved max-width), so it is safe to defer off the critical path —
@@ -19,6 +55,8 @@ const CAPABILITIES = [
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={personSchema} />
+      <JsonLd data={websiteSchema} />
       <section className="section pt-20 md:pt-28">
         <div className="grid items-center gap-16 md:grid-cols-[1.1fr_0.9fr]">
           <div className="animate-fade-up">

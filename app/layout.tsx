@@ -33,18 +33,24 @@ const mono = JetBrains_Mono({
 import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://omarhussein.dev'),
+  metadataBase: new URL('https://amoridev.com'),
   title: {
-    default: 'Omar Hussein — Front-End Developer',
-    template: '%s — Omar Hussein',
+    default: 'Omar Hussein | Front-End Developer',
+    template: '%s | Omar Hussein',
   },
   description:
-    'Omar Hussein is a Front-End Developer and IT & Computer Science professional building fast, precise, production-grade interfaces.',
+    'Omar Hussein is a Front-End Developer and systems-minded IT & Computer Science professional specializing in React, Next.js, and Tailwind CSS.',
   openGraph: {
-    title: 'Omar Hussein — Front-End Developer',
+    title: 'Omar Hussein | Front-End Developer',
     description:
-      'Front-End Developer and IT & Computer Science professional building fast, precise, production-grade interfaces.',
+      'Front-End Developer and systems-minded IT & Computer Science professional specializing in React, Next.js, and Tailwind CSS.',
     type: 'website',
+    url: 'https://amoridev.com/',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Omar Hussein | Front-End Developer',
+    description: 'Front-End Developer specializing in React, Next.js, and Tailwind CSS.',
   },
 };
 

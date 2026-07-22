@@ -1,7 +1,18 @@
 import type { Metadata } from 'next';
 import Eyebrow from '@/components/Eyebrow';
 
-export const metadata: Metadata = { title: 'Portfolio & Experience' };
+export const metadata: Metadata = {
+  title: 'Portfolio & Experience',
+  description: 'Discover selected projects by Omar Hussein, featuring dynamic e-commerce applications, corporate platforms, and interactive portfolio architectures built with React and Next.js.',
+  alternates: {
+    canonical: 'https://amoridev.com/portfolio',
+  },
+  openGraph: {
+    title: 'Portfolio & Experience | Omar Hussein',
+    description: 'Discover selected projects by Omar Hussein, featuring dynamic e-commerce applications, corporate platforms, and interactive portfolio architectures.',
+    url: 'https://amoridev.com/portfolio',
+  },
+};
 
 const PROJECTS = [
   {

@@ -3,7 +3,18 @@ import Eyebrow from '@/components/Eyebrow';
 import SkillBadge from '@/components/SkillBadge';
 import CategoryIcon from '@/components/CategoryIcon';
 
-export const metadata: Metadata = { title: 'Skills & Expertise' };
+export const metadata: Metadata = {
+  title: 'Skills & Expertise',
+  description: 'Explore Omar Hussein\'s technical expertise across Front-End Development, Core Programming, Databases, and UI/UX design. Proficient in React, Next.js, and more.',
+  alternates: {
+    canonical: 'https://amoridev.com/skills',
+  },
+  openGraph: {
+    title: 'Skills & Expertise | Omar Hussein',
+    description: 'Explore Omar Hussein\'s technical expertise across Front-End Development, Core Programming, Databases, and UI/UX design.',
+    url: 'https://amoridev.com/skills',
+  },
+};
 
 const GROUPS = [
   {

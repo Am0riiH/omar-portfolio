@@ -2,7 +2,18 @@ import type { Metadata } from 'next';
 import Eyebrow from '@/components/Eyebrow';
 import ContactForm from '@/components/ContactForm';
 
-export const metadata: Metadata = { title: 'Contact' };
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Get in touch with Omar Hussein for front-end roles, projects, or collaborations. Connect via email, LinkedIn, or GitHub.',
+  alternates: {
+    canonical: 'https://amoridev.com/contact',
+  },
+  openGraph: {
+    title: 'Contact | Omar Hussein',
+    description: 'Get in touch with Omar Hussein for front-end roles, projects, or collaborations. Connect via email, LinkedIn, or GitHub.',
+    url: 'https://amoridev.com/contact',
+  },
+};
 
 const LINKS = [
   { label: 'GitHub', href: 'https://github.com/Am0riiH', hop: 'github.com' },

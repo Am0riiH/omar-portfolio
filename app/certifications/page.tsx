@@ -1,7 +1,18 @@
 import type { Metadata } from 'next';
 import Eyebrow from '@/components/Eyebrow';
 
-export const metadata: Metadata = { title: 'Certifications' };
+export const metadata: Metadata = {
+  title: 'Certifications',
+  description: 'View Omar Hussein\'s professional certifications, including the Meta Front-End Developer Certificate and IBM DevOps Professional Certificate.',
+  alternates: {
+    canonical: 'https://amoridev.com/certifications',
+  },
+  openGraph: {
+    title: 'Certifications | Omar Hussein',
+    description: 'View Omar Hussein\'s professional certifications, including the Meta Front-End Developer Certificate and IBM DevOps Professional Certificate.',
+    url: 'https://amoridev.com/certifications',
+  },
+};
 
 const CERTS = [
   {
